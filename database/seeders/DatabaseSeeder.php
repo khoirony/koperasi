@@ -6,8 +6,6 @@ use App\Models\ConfigStatusPinjaman;
 use App\Models\ConfigUserRole;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Mahasiswa;
-use App\Models\Pegawai;
 use App\Models\Pinjaman;
 
 class DatabaseSeeder extends Seeder
@@ -95,6 +93,7 @@ class DatabaseSeeder extends Seeder
 
         Pinjaman::create([
             'id_peminjam' => 3,
+            'id_pegawai' => 2,
             'jumlah' => 3000000,
             'jangka_waktu' => 10,
             'bunga_perbulan' => 1,
@@ -115,6 +114,7 @@ class DatabaseSeeder extends Seeder
 
         Pinjaman::create([
             'id_peminjam' => 3,
+            'id_pegawai' => 2,
             'jumlah' => 5000000,
             'jangka_waktu' => 12,
             'bunga_perbulan' => 0.5,

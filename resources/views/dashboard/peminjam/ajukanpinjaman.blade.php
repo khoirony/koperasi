@@ -19,9 +19,9 @@
 </div>
 @endif
 
-@if(session()->has('loginError'))
+@if(session()->has('error'))
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{ session('loginError') }}
+    {{ session('error') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -57,30 +57,30 @@
                 <hr>
                 <div class="col-12">
                     <label for="name" class="form-label">Nama Peminjam</label>
-                    <input type="text" class="form-control" name="nama" id="nama" value="{{ $user->nama }}">
+                    <input type="text" class="form-control" name="nama" id="nama" value="{{ $user?->nama }}">
                 </div>
                 <div class="col-12">
                     <label for="nik" class="form-label">NIK</label>
-                    <input type="text" class="form-control" name="nik" id="nik" value="{{ $user->nik }}">
+                    <input type="text" class="form-control" name="nik" id="nik" value="{{ $user?->nik }}">
                 </div>
                 <div class="col-6">
                     <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                    <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" value="{{ $user->tempat_lahir }}">
+                    <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" value="{{ $user?->tempat_lahir }}">
                 </div>
                 <div class="col-6">
                     <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="{{ $user->tgl_lahir }}">
+                    <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="{{ $user?->tgl_lahir }}">
                 </div>
                 <div class="col-12">
                     <label for="active" class="form-label">Jenis Kelamain</label>
                     <select class="form-select" name="jenis_kelamin" id="jenis_kelamin" aria-label="Default select example">
-                        <option value="Laki-Laki" @if($user->jenis_kelamin == 'Laki-Laki') selected @endif>Laki-Laki</option>
-                        <option value="Perempuan" @if($user->jenis_kelamin == 'Perempuan') selected @endif>Perempuan</option>
+                        <option value="Laki-Laki" @if($user?->jenis_kelamin == 'Laki-Laki') selected @endif>Laki-Laki</option>
+                        <option value="Perempuan" @if($user?->jenis_kelamin == 'Perempuan') selected @endif>Perempuan</option>
                     </select>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" style="height: 100px;" required>{{ $user->alamat }}</textarea>
+                        <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" style="height: 100px;" required>{{ $user?->alamat }}</textarea>
                         <label for="floatingTextarea">Alamat Lengkap</label>
                         @error('alamat')
                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -91,22 +91,22 @@
                 </div>
                 <div class="col-12">
                     <label for="no_telp" class="form-label">Nomor Telfon</label>
-                    <input type="text" class="form-control" name="no_telp" id="no_telp" value="{{ $user->no_telp }}">
+                    <input type="text" class="form-control" name="no_telp" id="no_telp" value="{{ $user?->no_telp }}">
                 </div>
                 <div class="col-12">
                     <label for="active" class="form-label">Status Perkawinan</label>
                     <select class="form-select" name="status_kawin" id="status_kawin" aria-label="Default select example">
-                        <option value="Belum Kawin" @if($user->status_kawin == 'Belum Kawin') selected @endif>Belum Kawin</option>
-                        <option value="Kawin" @if($user->status_kawin == 'Kawin') selected @endif>Kawin</option>
+                        <option value="Belum Kawin" @if($user?->status_kawin == 'Belum Kawin') selected @endif>Belum Kawin</option>
+                        <option value="Kawin" @if($user?->status_kawin == 'Kawin') selected @endif>Kawin</option>
                     </select>
                 </div>
                 <div class="col-12">
                     <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                    <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="{{ $user->pekerjaan }}">
+                    <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="{{ $user?->pekerjaan }}">
                 </div>
                 <div class="col-12">
                     <label for="kewarganegaraan" class="form-label">Kewarganegaraan</label>
-                    <input type="text" class="form-control" name="kewarganegaraan" id="kewarganegaraan" value="{{ $user->kewarganegaraan }}">
+                    <input type="text" class="form-control" name="kewarganegaraan" id="kewarganegaraan" value="{{ $user?->kewarganegaraan }}">
                 </div>
 
                 <div class="text-center">

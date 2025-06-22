@@ -21,7 +21,7 @@
           <h5 class="card-title">Pegawai <span>| Jumlah</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-user-2-line"></i>
+              <i class="bi bi-person-workspace"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $jmlPegawai  }}</h6>
@@ -38,7 +38,7 @@
           <h5 class="card-title">Peminjam <span>| Aktif</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-user-3-line"></i>
+              <i class="bi bi-person-check-fill"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $jmlPeminjamActive }}</h6>
@@ -55,7 +55,7 @@
           <h5 class="card-title">Peminjam <span>| Belum Aktif</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-send-line"></i>
+              <i class="bi bi-person-x-fill"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $jmlPeminjamInactive }}</h6>
@@ -72,7 +72,7 @@
           <h5 class="card-title">Pinjaman <span>| Diproses</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-settings-line text-warning"></i>
+              <i class="bi bi-hourglass-split text-warning"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanDiproses }}</h6>
@@ -89,7 +89,7 @@
           <h5 class="card-title">Pinjaman <span>| Ditolak</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-close-line text-danger"></i>
+              <i class="bi bi-clipboard2-x-fill text-danger"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanDitolak }}</h6>
@@ -106,7 +106,7 @@
           <h5 class="card-title">Pinjaman <span>| Diterima</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-check-line text-success"></i>
+              <i class="bi bi-clipboard2-check-fill text-success"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanSukses }}</h6>

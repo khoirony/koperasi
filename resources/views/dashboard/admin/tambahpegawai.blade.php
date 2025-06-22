@@ -85,11 +85,11 @@
                             @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{ $n++ }}</th>
-                                <td>{{ $user->nama }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user?->nama ?? '-' }}</td>
+                                <td>{{ $user?->email ?? '-' }}</td>
 
                                 <td>
-                                    @if($user->is_active == 1) 
+                                    @if($user?->is_active == 1) 
                                         <span class="px-3 py-1 bg-primary text-white rounded-pill">Aktif</span>
                                     @else 
                                         <span class="px-3 py-1 bg-danger text-white rounded-pill">Belum Aktif</span>
@@ -97,10 +97,10 @@
                                 </td>
 
                                 <td>
-                                    <a href="/editpegawai/{{ $user->id }}" class="btn btn-sm btn-primary">
+                                    <a href="/editpegawai/{{ $user?->id }}" class="btn btn-sm btn-primary">
                                         <i class="bi bi-pencil-square"></i>
                                     </a> 
-                                    <a href="/hapuspegawai/{{ $user->id }}" class="btn btn-sm btn-danger">
+                                    <a href="/hapuspegawai/{{ $user?->id }}" class="btn btn-sm btn-danger">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>

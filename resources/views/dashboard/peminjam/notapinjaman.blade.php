@@ -17,65 +17,65 @@
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Jumlah Pinjaman</strong></p></td>
-                            <td colspan="2"<p>: Rp {{ number_format($pinjaman->jumlah) }},-</p></td>
+                            <td colspan="2"<p>: Rp {{ number_format($pinjaman?->jumlah ?? 0) }},-</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Jangka Waktu</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->jangka_waktu }} bulan</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->jangka_waktu ?? 0 }} bulan</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Untuk Keperluan</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->tujuan_pinjaman }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->tujuan_pinjaman ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="3"><center>Data Pemohon Kredit</center></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Nama Pemohon</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->nama }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->nama ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>NIK</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->nik }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->nik ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Tempat, Tanggal Lahir</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->tempat_lahir }}, {{ $pinjaman->tgl_lahir }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->tempat_lahir }}, {{ $pinjaman?->tgl_lahir }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Jenis Kelamin</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->jenis_kelamin }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->jenis_kelamin ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Pekerjaan</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->pekerjaan }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->pekerjaan ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Nomor Telpon</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->no_telp }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->no_telp ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Alamat</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->alamat }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->alamat ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Status Perkawinan</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->status_kawin }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->status_kawin ?? '-' }}</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Kewarganegaraan</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->kewarganegaraan }}</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->kewarganegaraan ?? '-' }}</p></td>
                         </tr>
                     </table>
                     <table border="1" width="100%">
                         <tr>
                             <td colspan="2" style="padding: 10px;">
                                 <p><strong>Catatan: </strong></p>
-                                <p>{{ $pinjaman->tanggapan }}</p>
+                                <p>{{ $pinjaman?->tanggapan ?? '-' }}</p>
                             </td>
                             <td colspan="1" align="right" style="padding: 10px;">
                                 <p><strong>Disetujui Oleh: </strong></p>
-                                <p>{{ $pinjaman->pegawai->nama }}</p>
+                                <p>{{ $pinjaman?->pegawai?->nama ?? '-' }}</p>
                             </td>
                         </tr>
                     </table>
@@ -87,19 +87,19 @@
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Nominal Pinjaman</strong></p></td>
-                            <td colspan="2"<p>: Rp {{ number_format($pinjaman->jumlah) }},-</p></td>
+                            <td colspan="2"<p>: Rp {{ number_format($pinjaman?->jumlah ?? 0) }},-</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Jangka Waktu</strong></p></td>
-                            <td colspan="2"<p>: {{ $pinjaman->jangka_waktu }} bulan</p></td>
+                            <td colspan="2"<p>: {{ $pinjaman?->jangka_waktu ?? 0 }} bulan</p></td>
                         </tr>
                         <tr>
-                            <td colspan="1"><p><strong>Bunga Perbulan ({{ $pinjaman->bunga_perbulan }}%)</strong></p></td>
-                            <td colspan="2"<p>: Rp {{ number_format(($pinjaman->jumlah*($pinjaman->bunga_perbulan/100))*$pinjaman->jangka_waktu) }},-</p></td>
+                            <td colspan="1"><p><strong>Bunga Perbulan ({{ $pinjaman?->bunga_perbulan ?? 0 }}%)</strong></p></td>
+                            <td colspan="2"<p>: Rp {{ number_format(($pinjaman?->jumlah*($pinjaman?->bunga_perbulan/100))*$pinjaman?->jangka_waktu) }},-</p></td>
                         </tr>
                         <tr>
                             <td colspan="1"><p><strong>Realisasi Total Pinjaman</strong></p></td>
-                            <td colspan="2"<p>: Rp {{ number_format($pinjaman->jumlah+($pinjaman->jumlah*($pinjaman->bunga_perbulan/100))*$pinjaman->jangka_waktu) }},-</p></td>
+                            <td colspan="2"<p>: Rp {{ number_format($pinjaman?->jumlah+($pinjaman?->jumlah*($pinjaman?->bunga_perbulan/100))*$pinjaman?->jangka_waktu) }},-</p></td>
                         </tr>
                     </table>
 
@@ -113,7 +113,7 @@
                                     <p>Penerima Pinjaman</p>
                                     <br>
                                     <br>
-                                    <p>{{ $pinjaman->nama }}</p>
+                                    <p>{{ $pinjaman?->nama ?? 0 }}</p>
                                 </center>
                             </td>
                             <td colspan="1">

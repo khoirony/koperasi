@@ -82,8 +82,11 @@ class PeminjamController extends Controller
     public function editpinjaman($id)
     {
         $pinjaman  = Pinjaman::where('id', $id)->first();
+        if(!$pinjaman){
+            abort(404);
+        }
 
-        if($pinjaman->status_pinjaman == 2){
+        if($pinjaman?->status_pinjaman == 2){
             return redirect('/historypinjaman')->with('error', 'Pinjaman yang sudah diterima tidak boleh diubah');
         }
 
@@ -141,6 +144,10 @@ class PeminjamController extends Controller
     {
         $pinjaman = Pinjaman::where('id', $id)->first();
 
+        if(!$pinjaman){
+            abort(404);
+        }
+        
         if($pinjaman->status_pinjaman == 2){
             return redirect('/historypinjaman')->with('error', 'Pinjaman yang sudah diterima tidak boleh dihapus');
         }
@@ -152,6 +159,10 @@ class PeminjamController extends Controller
     public function notapinjaman($id)
     {
         $pinjaman  = Pinjaman::where('id', $id)->first();
+
+        if(!$pinjaman){
+            abort(404);
+        }
 
         if($pinjaman->status_pinjaman != 2){
             return redirect('/historypinjaman')->with('error', 'Pinjaman belum diterima');

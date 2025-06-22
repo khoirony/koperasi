@@ -34,7 +34,6 @@
 <section class="section dashboard">
     <div class="row">
         <div class="col-lg-5">
-
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Form Peminjam</h5>
@@ -70,14 +69,11 @@
                         </div>
                     </form><!-- Vertical Form -->
                     <!-- End General Form Elements -->
-
                 </div>
             </div>
-
         </div>
 
         <div class="col-lg-7">
-
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Daftar Peminjam</h5>
@@ -96,27 +92,25 @@
                             @foreach ($users as $index => $user)
                             <tr>
                                 <th scope="row">{{ $index+1 }}</th>
-                                <td>{{ $user->nama }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user?->nama }}</td>
+                                <td>{{ $user?->email }}</td>
                                 <td>
-                                    @if($user->is_active == 1) 
+                                    @if($user?->is_active == 1) 
                                         <span class="px-3 py-1 bg-primary text-white rounded-pill">Aktif</span>
                                     @else 
                                         <span class="px-3 py-1 bg-danger text-white rounded-pill">Belum Aktif</span>
                                     @endif
                                 </td>
                                 <td>
-                                  <a href="/editpeminjam/{{ $user->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
-                                  <a href="/hapuspeminjam/{{ $user->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                  <a href="/editpeminjam/{{ $user?->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
+                                  <a href="/hapuspeminjam/{{ $user?->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
-
         </div>
     </div>
 </section>

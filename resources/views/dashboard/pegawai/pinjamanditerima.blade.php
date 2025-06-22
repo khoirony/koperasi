@@ -23,9 +23,9 @@
 </div>
 @endif
 
-@if(session()->has('loginError'))
+@if(session()->has('error'))
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{ session('loginError') }}
+    {{ session('error') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -50,19 +50,19 @@
         <tbody>
           @foreach($pinjamanDiterima as $pinjaman)
           <tr>
-            <th scope="row">{{ $pinjaman->created_at }}</th>
-            <td>{{ $pinjaman->peminjam->nama }}</td>
-            <td>Rp{{ number_format($pinjaman->jumlah) }},-</td>
-            <td>{{ $pinjaman->jangka_waktu }} bulan</td>
-            <td>{{ $pinjaman->bunga_perbulan }}%</td>
+            <th scope="row">{{ $pinjaman?->created_at }}</th>
+            <td>{{ $pinjaman?->peminjam?->nama ?? '-' }}</td>
+            <td>Rp{{ number_format($pinjaman?->jumlah ?? 0) }},-</td>
+            <td>{{ $pinjaman?->jangka_waktu ?? 0 }} bulan</td>
+            <td>{{ $pinjaman?->bunga_perbulan ?? 0 }}%</td>
             <td>
               @php
-                $realisasiperbulan = $pinjaman->jumlah*($pinjaman->bunga_perbulan/100)
+                $realisasiperbulan = $pinjaman?->jumlah*($pinjaman?->bunga_perbulan/100)
               @endphp
-              Rp{{ number_format($pinjaman->jumlah+($realisasiperbulan*$pinjaman->jangka_waktu)) }},-
+              Rp{{ number_format($pinjaman?->jumlah+($realisasiperbulan*$pinjaman?->jangka_waktu)) }},-
             </td>
             <td>
-              @switch($pinjaman->status_pinjaman)
+              @switch($pinjaman?->status_pinjaman)
                   @case(1)
                   <span class="badge bg-warning">{{ 'Sedang Diproses' }}</span>
                     @break
@@ -74,10 +74,10 @@
                     @break
               @endswitch
             </td>
-            <td>{{ $pinjaman->tanggapan }}</td>
+            <td>{{ $pinjaman?->tanggapan }}</td>
             <td>
-              <a href="/kelolatanggapan/{{ $pinjaman->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
-              <a href="/hapustanggapan/{{ $pinjaman->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              <a href="/kelolatanggapan/{{ $pinjaman?->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
+              <a href="/hapustanggapan/{{ $pinjaman?->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
             </td>
           </tr>
           @endforeach

@@ -28,7 +28,6 @@
 <section class="section dashboard">
   <div class="card">
     <div class="card-body pt-5">
-
       <table class="table table-striped">
         <thead>
           <tr>
@@ -45,14 +44,14 @@
         <tbody>
           @foreach($historyPinjaman as $pinjaman)
           <tr>
-            <th scope="row">{{ $pinjaman->created_at }}</th>
-            <td>{{ $pinjaman->peminjam->nama }}</td>
-            <td>Rp{{ number_format($pinjaman->jumlah) }},-</td>
-            <td>{{ $pinjaman->jangka_waktu }}</td>
-            <td>{{ $pinjaman->tanggapan ?? '- Belum Ada -' }}</td>
-            <td>{{ $pinjaman->pegawai->nama ?? '-Belum Ada-' }}</td>
+            <th scope="row">{{ $pinjaman?->created_at }}</th>
+            <td>{{ $pinjaman?->peminjam?->nama ?? '-' }}</td>
+            <td>Rp{{ number_format($pinjaman?->jumlah ?? 0) }},-</td>
+            <td>{{ $pinjaman?->jangka_waktu ?? 0 }} bulan</td>
+            <td>{{ $pinjaman?->tanggapan ?? '- Belum Ada -' }}</td>
+            <td>{{ $pinjaman?->pegawai?->nama ?? '-Belum Ada-' }}</td>
             <td>
-              @switch($pinjaman->status_pinjaman)
+              @switch($pinjaman?->status_pinjaman)
                   @case(1)
                   <span class="badge bg-warning">{{ 'Sedang Diproses' }}</span>
                     @break
@@ -65,18 +64,17 @@
               @endswitch
             </td>
             <td>
-              @if($pinjaman->status_pinjaman != 2)
-                <a href="/editpinjaman/{{ $pinjaman->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
-                <a href="/hapuspinjaman/{{ $pinjaman->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              @if($pinjaman?->status_pinjaman != 2)
+                <a href="/editpinjaman/{{ $pinjaman?->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
+                <a href="/hapuspinjaman/{{ $pinjaman?->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
               @else
-                <a href="/notapinjaman/{{ $pinjaman->id }}" target="_blank" class="btn btn-sm btn-success"><i class="bi bi-receipt"></i></a> 
+                <a href="/notapinjaman/{{ $pinjaman?->id }}" target="_blank" class="btn btn-sm btn-success"><i class="bi bi-receipt"></i></a> 
               @endif
             </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-
     </div>
   </div>
 </section>

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Pegawai;
-use App\Models\Aduan;
 use App\Models\Pinjaman;
 
 class PegawaiController extends Controller
@@ -58,6 +56,11 @@ class PegawaiController extends Controller
     {
         $users   = User::where('role_id', 3)->paginate(10);
         $peminjam = User::where('id', $id)->first();
+
+        if(!$peminjam){
+            abort(404);
+        }
+
         return view('dashboard.pegawai.editpeminjam', [
             'title' => 'Edit peminjam',
             'users' => $users,
@@ -87,7 +90,13 @@ class PegawaiController extends Controller
 
     public function hapuspeminjam($id)
     {
-        $user = User::where('id', $id)->delete();
+        $user = User::where('id', $id)->first();
+
+        if(!$user){
+            abort(404);
+        }
+
+        $user->delete();
         return redirect('/tambahpeminjam')->with('success', 'peminjam Berhasil Dihapus');
     }
 
@@ -103,6 +112,11 @@ class PegawaiController extends Controller
     public function kelolatanggapan($id)
     {
         $pinjaman  = Pinjaman::where('id', $id)->first();
+
+        if(!$pinjaman){
+            abort(404);
+        }
+
         return view('dashboard.pegawai.kelolatanggapan', [
             'title' => 'Kelola pinjaman',
             'pinjaman' => $pinjaman,
@@ -139,7 +153,13 @@ class PegawaiController extends Controller
 
     public function hapustanggapan($id)
     {
-        $aduan = Pinjaman::where('id', $id)->delete();
+        $pinjaman = Pinjaman::where('id', $id)->first();
+
+        if(!$pinjaman){
+            abort(404);
+        }
+
+        $pinjaman->delete();
         return back()->with('success', 'Aduan Berhasil Dihapus');
     }
 

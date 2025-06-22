@@ -51,7 +51,7 @@
                                 <label for="email" class="form-label">Pilih Role</label>
                                 <select class="form-select" name="role" id="role" aria-label="Default select example">
                                     <option value="2">Pegawai</option>
-                                    <option value="3">Mahasiswa</option>
+                                    <option value="3">Peminjam</option>
                                 </select>
                             </div>
 

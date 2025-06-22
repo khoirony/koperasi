@@ -21,7 +21,7 @@
           <h5 class="card-title">Pinjaman <span>| Diproses</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-settings-line text-warning"></i>
+              <i class="bi bi-hourglass-split text-warning"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanDiproses }}</h6>
@@ -38,7 +38,7 @@
           <h5 class="card-title">Pinjaman <span>| Ditolak</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-close-line text-danger"></i>
+              <i class="bi bi-clipboard2-x-fill text-danger"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanSukses }}</h6>
@@ -55,7 +55,7 @@
           <h5 class="card-title">Pinjaman <span>| Selesai</span></h5>
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="ri ri-mail-check-line text-success"></i>
+              <i class="bi bi-clipboard2-check-fill text-success"></i>
             </div>
             <div class="ps-3">
               <h6>{{ $pinjamanDitolak }}</h6>
