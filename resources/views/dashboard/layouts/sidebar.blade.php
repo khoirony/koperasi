@@ -51,7 +51,7 @@
 
       @if(Auth::user()->role_id == 2)
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/peminjam">
+        <a class="nav-link collapsed" href="/nasabah">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>

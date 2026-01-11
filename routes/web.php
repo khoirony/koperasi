@@ -8,6 +8,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PeminjamController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\PeminjamController;
 |
 */
 
+
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
@@ -27,11 +29,17 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
-Route::get('/nasabah', [NasabahController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', function () {
+    if (Auth::user()->role_id == 1) {
+        return redirect('/admin');
+    } else {
+        return redirect('/nasabah');
+    }
+})->middleware(['auth']);
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
     Route::get('/semuanasabah', [AdminController::class, 'semuaNasabah']);
     Route::put('/nasabah/toggle-status/{id}', [AdminController::class, 'toggleNasabahStatus']);
     Route::post('/tambahnasabah', [AdminController::class, 'storeNasabah']);
@@ -52,14 +60,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hapustabungan/{id}', [AdminController::class, 'destroyTabungan']);
 });
 
+Route::middleware(['auth', 'nasabah'])->group(function () {
+    Route::get('/nasabah', [NasabahController::class, 'index']);
+    
+    Route::get('/ajukanpinjaman', [NasabahController::class, 'ajukanpinjaman']);
+    Route::post('/ajukanpinjaman', [NasabahController::class, 'storepinjaman']);
+    Route::get('/historypinjaman', [NasabahController::class, 'historypinjaman']);
+    Route::get('/notapinjaman/{id}', [NasabahController::class, 'notapinjaman']);
+    Route::put('/editpinjaman/{id}', [NasabahController::class, 'storeedit']);
+    Route::get('/hapuspinjaman/{id}', [NasabahController::class, 'hapuspinjaman']);
 
-Route::get('/ajukanpinjaman', [NasabahController::class, 'ajukanpinjaman'])->middleware('auth');
-Route::post('/ajukanpinjaman', [NasabahController::class, 'storepinjaman'])->middleware('auth');
-Route::get('/historypinjaman', [NasabahController::class, 'historypinjaman'])->middleware('auth');
-Route::get('/notapinjaman/{id}', [NasabahController::class, 'notapinjaman'])->middleware('auth');
-Route::get('/editpinjaman/{id}', [NasabahController::class, 'editpinjaman'])->middleware('auth');
-Route::post('/editpinjaman/', [NasabahController::class, 'storeedit'])->middleware('auth');
-Route::get('/hapuspinjaman/{id}', [NasabahController::class, 'hapuspinjaman'])->middleware('auth');
+    Route::get('/tabungansaya', [NasabahController::class, 'semuatabungan']);
+    Route::post('/tabungansaya', [NasabahController::class, 'storeTabungan']);
+});
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/profile', [ProfileController::class, 'edit'])->middleware('auth');
