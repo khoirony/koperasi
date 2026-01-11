@@ -7,8 +7,10 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Home</li>
-      <li class="breadcrumb-item">Anggota</li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      @if(Auth::user()->role_id == 1)
+      <li class="breadcrumb-item">Admin</li>
+      @endif
+      <li class="breadcrumb-item active">{{ $title }}</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->

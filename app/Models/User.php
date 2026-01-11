@@ -35,11 +35,16 @@ class User extends Authenticatable
 
     public function pegawai() 
 	{
-		return $this->hasMany(User::class, 'id_pegawai');
+		return $this->hasMany(User::class, 'id_admin');
 	}
     
     public function peminjam() 
 	{
-		return $this->hasMany(User::class, 'id_peminjam');
+		return $this->hasMany(User::class, 'id_nasabah');
+	}
+
+    public function pinjamans() 
+	{
+		return $this->hasMany(Pinjaman::class, 'id_nasabah');
 	}
 }

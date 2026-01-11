@@ -5,20 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pinjaman extends Model
+class Tabungan extends Model
 {
     use HasFactory;
 
-    protected $table = 'pinjamans';
+    protected $table = 'tabungans';
 
     protected $guarded = ['id'];
 
-    public function peminjam() 
+    public function nasabah() 
 	{
 		return $this->belongsTo(User::class, 'id_nasabah');
-	}
-    public function pegawai() 
-	{
-		return $this->belongsTo(User::class, 'id_admin');
 	}
 }

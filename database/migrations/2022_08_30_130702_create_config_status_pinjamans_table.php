@@ -27,6 +27,6 @@ class CreateConfigStatusPinjamansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('config_status_pinjamans');
     }
 }

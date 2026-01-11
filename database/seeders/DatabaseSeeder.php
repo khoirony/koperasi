@@ -7,6 +7,7 @@ use App\Models\ConfigUserRole;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Pinjaman;
+use App\Models\Tabungan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,10 +23,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Admin',
         ]);
         ConfigUserRole::create([
-            'nama' => 'Pegawai',
-        ]);
-        ConfigUserRole::create([
-            'nama' => 'Peminjam',
+            'nama' => 'Nasabah',
         ]);
 
         // status pinjaman
@@ -64,7 +62,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Saad Adzan Magrib',
             'email' => 'saad@gmail.com',
             'password' => bcrypt('saad12345'),
-            'role_id' => 3,
+            'role_id' => 2,
             'nik' => '02222222222222',
             'tempat_lahir' => 'Makassar',
             'tgl_lahir' => '2000-10-23',
@@ -74,7 +72,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pinjaman::create([
-            'id_peminjam' => 3,
+            'id_nasabah' => 3,
             'jumlah' => 3000000,
             'jangka_waktu' => 10,
             'status_pinjaman' => 1,
@@ -92,8 +90,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pinjaman::create([
-            'id_peminjam' => 3,
-            'id_pegawai' => 2,
+            'id_nasabah' => 3,
+            'id_admin' => 1,
             'jumlah' => 3000000,
             'jangka_waktu' => 10,
             'bunga_perbulan' => 1,
@@ -113,8 +111,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pinjaman::create([
-            'id_peminjam' => 3,
-            'id_pegawai' => 2,
+            'id_nasabah' => 3,
+            'id_admin' => 1,
             'jumlah' => 5000000,
             'jangka_waktu' => 12,
             'bunga_perbulan' => 0.5,
@@ -132,6 +130,31 @@ class DatabaseSeeder extends Seeder
             'pekerjaan' => 'Disainer',
             'kewarganegaraan' => 'Dubai',
         ]);
-        
+
+        Tabungan::create([
+            'id_nasabah' => 3,
+            'jumlah_uang' => 10000,
+            'aksi' => 'Tabung',
+            'status' => 1,
+        ]); 
+        Tabungan::create([
+            'id_nasabah' => 3,
+            'jumlah_uang' => 10000,
+            'aksi' => 'Tabung',
+            'status' => 2,
+        ]); 
+        Tabungan::create([
+            'id_nasabah' => 3,
+            'jumlah_uang' => 10000,
+            'aksi' => 'Tabung',
+            'status' => 2,
+        ]); 
+
+        Tabungan::create([
+            'id_nasabah' => 3,
+            'jumlah_uang' => 20000,
+            'aksi' => 'Ambil',
+            'status' => 2,
+        ]); 
     }
 }

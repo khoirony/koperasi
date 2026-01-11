@@ -27,6 +27,6 @@ class CreateConfigUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('config_user_roles');
     }
 }

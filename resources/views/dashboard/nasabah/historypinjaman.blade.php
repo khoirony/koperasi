@@ -7,10 +7,8 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Home</li>
-      @if(Auth::user()->role == 1)
-        <li class="breadcrumb-item">Admin</li>
-      @elseif(Auth::user()->role == 2)
-        <li class="breadcrumb-item">Pegawai</li>
+      @if(Auth::user()->role_id == 1)
+      <li class="breadcrumb-item">Admin</li>
       @endif
       <li class="breadcrumb-item active">{{ $title }}</li>
     </ol>
@@ -32,35 +30,28 @@
 <section class="section dashboard">
   <div class="card">
     <div class="card-body pt-5">
-
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Tgl</th>
+            <th scope="col">Waktu</th>
             <th scope="col">Nama Peminjam</th>
             <th scope="col">Jumlah Pinjaman</th>
             <th scope="col">Jangka Waktu</th>
-            <th scope="col">Bunga</th>
-            <th scope="col">Realisasi</th>
-            <th scope="col">Status</th>
             <th scope="col">Tanggapan</th>
-            <th scope="col" width="10%">aksi</th>
+            <th scope="col">Diproses Oleh</th>
+            <th scope="col">Status</th>
+            <th scope="col">aksi</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($pinjamanDiterima as $pinjaman)
+          @foreach($historyPinjaman as $pinjaman)
           <tr>
             <th scope="row">{{ $pinjaman?->created_at }}</th>
             <td>{{ $pinjaman?->peminjam?->nama ?? '-' }}</td>
             <td>Rp{{ number_format($pinjaman?->jumlah ?? 0) }},-</td>
             <td>{{ $pinjaman?->jangka_waktu ?? 0 }} bulan</td>
-            <td>{{ $pinjaman?->bunga_perbulan ?? 0 }}%</td>
-            <td>
-              @php
-                $realisasiperbulan = $pinjaman?->jumlah*($pinjaman?->bunga_perbulan/100)
-              @endphp
-              Rp{{ number_format($pinjaman?->jumlah+($realisasiperbulan*$pinjaman?->jangka_waktu)) }},-
-            </td>
+            <td>{{ $pinjaman?->tanggapan ?? '- Belum Ada -' }}</td>
+            <td>{{ $pinjaman?->pegawai?->nama ?? '-Belum Ada-' }}</td>
             <td>
               @switch($pinjaman?->status_pinjaman)
                   @case(1)
@@ -74,16 +65,18 @@
                     @break
               @endswitch
             </td>
-            <td>{{ $pinjaman?->tanggapan }}</td>
             <td>
-              <a href="/kelolatanggapan/{{ $pinjaman?->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
-              <a href="/hapustanggapan/{{ $pinjaman?->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              @if($pinjaman?->status_pinjaman != 2)
+                <a href="/editpinjaman/{{ $pinjaman?->id }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> 
+                <a href="/hapuspinjaman/{{ $pinjaman?->id }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              @else
+                <a href="/notapinjaman/{{ $pinjaman?->id }}" target="_blank" class="btn btn-sm btn-success"><i class="bi bi-receipt"></i></a> 
+              @endif
             </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-
     </div>
   </div>
 </section>

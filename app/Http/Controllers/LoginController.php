@@ -35,11 +35,7 @@ class LoginController extends Controller
             }
             
             if($user->role_id == 2){
-                return redirect()->intended('/pegawai');
-            }
-            
-            if($user->role_id == 3){
-                return redirect()->intended('/peminjam');
+                return redirect()->intended('/nasabah');
             }
         }
 

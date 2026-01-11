@@ -15,8 +15,8 @@ class CreatePinjamansTable extends Migration
     {
         Schema::create('pinjamans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_peminjam')->nullable();
-            $table->unsignedBigInteger('id_pegawai')->nullable();
+            $table->unsignedBigInteger('id_nasabah')->nullable();
+            $table->unsignedBigInteger('id_admin')->nullable();
             $table->bigInteger('jumlah')->nullable();
             $table->integer('jangka_waktu')->nullable();
             $table->double('bunga_perbulan',2)->nullable();
@@ -38,8 +38,8 @@ class CreatePinjamansTable extends Migration
             $table->string('kewarganegaraan')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_peminjam')->references('id')->on('users');  
-            $table->foreign('id_pegawai')->references('id')->on('users'); 
+            $table->foreign('id_nasabah')->references('id')->on('users');  
+            $table->foreign('id_admin')->references('id')->on('users'); 
             $table->foreign('status_pinjaman')->references('id')->on('config_status_pinjamans'); 
         });
     }
@@ -51,6 +51,6 @@ class CreatePinjamansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aduans');
+        Schema::dropIfExists('pinjamans');
     }
 }

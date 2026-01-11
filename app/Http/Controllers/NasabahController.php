@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Pinjaman;
 use App\Models\User;
 
-class PeminjamController extends Controller
+class NasabahController extends Controller
 {
     public function index()
     {
-        $pinjamanDiproses  = Pinjaman::where('status_pinjaman', 1)->where('id_peminjam', Auth::user()->id)->count();
-        $pinjamanSukses  = Pinjaman::where('status_pinjaman', 2)->where('id_peminjam', Auth::user()->id)->count();
-        $pinjamanDitolak  = Pinjaman::where('status_pinjaman', 3)->where('id_peminjam', Auth::user()->id)->count();
-        return view('dashboard.peminjam.index', [
+        $pinjamanDiproses  = Pinjaman::where('status_pinjaman', 1)->where('id_nasabah', Auth::user()->id)->count();
+        $pinjamanSukses  = Pinjaman::where('status_pinjaman', 2)->where('id_nasabah', Auth::user()->id)->count();
+        $pinjamanDitolak  = Pinjaman::where('status_pinjaman', 3)->where('id_nasabah', Auth::user()->id)->count();
+        return view('dashboard.nasabah.index', [
             'title' => 'Dashboard',
             'pinjamanDiproses' => $pinjamanDiproses,
             'pinjamanSukses' => $pinjamanSukses,
@@ -25,7 +25,7 @@ class PeminjamController extends Controller
     public function ajukanpinjaman()
     {
         $user = User::where('id', Auth::user()->id)->first();
-        return view('dashboard.peminjam.ajukanpinjaman', [
+        return view('dashboard.nasabah.ajukanpinjaman', [
             'title' => 'Ajukan Pinjaman',
             'user' => $user,
         ]);
@@ -50,7 +50,7 @@ class PeminjamController extends Controller
         ]);
            
         $pinjaman = new Pinjaman();
-        $pinjaman->id_peminjam = Auth::user()->id;
+        $pinjaman->id_nasabah = Auth::user()->id;
         $pinjaman->jumlah = $request->input('jumlah');
         $pinjaman->jangka_waktu = $request->input('jangka_waktu');
         $pinjaman->tujuan_pinjaman = $request->input('tujuan_pinjaman');
@@ -72,8 +72,8 @@ class PeminjamController extends Controller
 
     public function historypinjaman()
     {
-        $historyPinjaman = Pinjaman::where('id_peminjam', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return view('dashboard.peminjam.historypinjaman', [
+        $historyPinjaman = Pinjaman::where('id_nasabah', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('dashboard.nasabah.historypinjaman', [
             'title' => 'History Pinjaman',
             'historyPinjaman' => $historyPinjaman
         ]);
@@ -90,7 +90,7 @@ class PeminjamController extends Controller
             return redirect('/historypinjaman')->with('error', 'Pinjaman yang sudah diterima tidak boleh diubah');
         }
 
-        return view('dashboard.peminjam.editpinjaman', [
+        return view('dashboard.nasabah.editpinjaman', [
             'title' => 'Kelola Pinjaman',
             'pinjaman' => $pinjaman,
         ]);
@@ -168,7 +168,7 @@ class PeminjamController extends Controller
             return redirect('/historypinjaman')->with('error', 'Pinjaman belum diterima');
         }
 
-        return view('dashboard.peminjam.notapinjaman', [
+        return view('dashboard.nasabah.notapinjaman', [
             'title' => 'Nota Pinjaman',
             'pinjaman' => $pinjaman
         ]);

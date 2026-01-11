@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -27,36 +28,38 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
-Route::get('/pegawai', [PegawaiController::class, 'index'])->middleware('auth');
-Route::get('/peminjam', [PeminjamController::class, 'index'])->middleware('auth');
+Route::get('/nasabah', [NasabahController::class, 'index'])->middleware('auth');
 
-Route::get('/tambahpegawai', [AdminController::class, 'tambahpegawai'])->middleware('auth');
-Route::post('/tambahpegawai', [AdminController::class, 'storepegawai'])->middleware('auth');
-Route::get('/editpegawai/{id}', [AdminController::class, 'editpegawai'])->middleware('auth');
-Route::post('/editpegawai', [AdminController::class, 'updatepegawai'])->middleware('auth');
-Route::get('/hapuspegawai/{id}', [AdminController::class, 'hapuspegawai'])->middleware('auth');
 
-Route::get('/tambahpeminjam', [PegawaiController::class, 'tambahpeminjam'])->middleware('auth');
-Route::post('/tambahpeminjam', [PegawaiController::class, 'storepeminjam'])->middleware('auth');
-Route::get('/editpeminjam/{id}', [PegawaiController::class, 'editpeminjam'])->middleware('auth');
-Route::post('/editpeminjam', [PegawaiController::class, 'updatepeminjam'])->middleware('auth');
-Route::get('/hapuspeminjam/{id}', [PegawaiController::class, 'hapuspeminjam'])->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/semuanasabah', [AdminController::class, 'semuaNasabah']);
+    Route::put('/nasabah/toggle-status/{id}', [AdminController::class, 'toggleNasabahStatus']);
+    Route::post('/tambahnasabah', [AdminController::class, 'storeNasabah']);
+    Route::put('/updatenasabah/{id}', [AdminController::class, 'updateNasabah']);
+    Route::get('/hapusnasabah/{id}', [AdminController::class, 'hapusNasabah']);
+    
+    Route::get('/pinjamandiproses', [AdminController::class, 'pinjamandiproses']);
+    Route::get('/pinjamanditolak', [AdminController::class, 'pinjamanditolak']);
+    Route::get('/pinjamanditerima', [AdminController::class, 'pinjamanditerima']);
 
-Route::get('/pinjamandiproses', [PegawaiController::class, 'pinjamandiproses'])->middleware('auth');
-Route::get('/pinjamanditolak', [PegawaiController::class, 'pinjamanditolak'])->middleware('auth');
-Route::get('/pinjamanditerima', [PegawaiController::class, 'pinjamanditerima'])->middleware('auth');
+    Route::get('/kelolatanggapan/{id}', [AdminController::class, 'kelolatanggapan']);
+    Route::post('/kelolatanggapan', [AdminController::class, 'storetanggapan']);
+    Route::get('/hapustanggapan/{id}', [AdminController::class, 'hapustanggapan']);
 
-Route::get('/kelolatanggapan/{id}', [PegawaiController::class, 'kelolatanggapan'])->middleware('auth');
-Route::post('/kelolatanggapan', [PegawaiController::class, 'storetanggapan'])->middleware('auth');
-Route::get('/hapustanggapan/{id}', [PegawaiController::class, 'hapustanggapan'])->middleware('auth');
+    Route::get('/semuatabungan', [AdminController::class, 'semuatabungan']);
+    Route::post('/semuatabungan', [AdminController::class, 'storeTabungan']);
+    Route::put('/semuatabungan/{id}', [AdminController::class, 'updateTabungan']);
+    Route::get('/hapustabungan/{id}', [AdminController::class, 'destroyTabungan']);
+});
 
-Route::get('/ajukanpinjaman', [PeminjamController::class, 'ajukanpinjaman'])->middleware('auth');
-Route::post('/ajukanpinjaman', [PeminjamController::class, 'storepinjaman'])->middleware('auth');
-Route::get('/historypinjaman', [PeminjamController::class, 'historypinjaman'])->middleware('auth');
-Route::get('/notapinjaman/{id}', [PeminjamController::class, 'notapinjaman'])->middleware('auth');
-Route::get('/editpinjaman/{id}', [PeminjamController::class, 'editpinjaman'])->middleware('auth');
-Route::post('/editpinjaman/', [PeminjamController::class, 'storeedit'])->middleware('auth');
-Route::get('/hapuspinjaman/{id}', [PeminjamController::class, 'hapuspinjaman'])->middleware('auth');
+
+Route::get('/ajukanpinjaman', [NasabahController::class, 'ajukanpinjaman'])->middleware('auth');
+Route::post('/ajukanpinjaman', [NasabahController::class, 'storepinjaman'])->middleware('auth');
+Route::get('/historypinjaman', [NasabahController::class, 'historypinjaman'])->middleware('auth');
+Route::get('/notapinjaman/{id}', [NasabahController::class, 'notapinjaman'])->middleware('auth');
+Route::get('/editpinjaman/{id}', [NasabahController::class, 'editpinjaman'])->middleware('auth');
+Route::post('/editpinjaman/', [NasabahController::class, 'storeedit'])->middleware('auth');
+Route::get('/hapuspinjaman/{id}', [NasabahController::class, 'hapuspinjaman'])->middleware('auth');
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/profile', [ProfileController::class, 'edit'])->middleware('auth');
