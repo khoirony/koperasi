@@ -25,12 +25,22 @@ class ProfileController extends Controller
 
         
         $user = User::find($request->input('id'));
-        if($request->file('image') != null){
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $image = time()."_".$file->getClientOriginalName();
-            $tujuan_upload = 'profpic';
-            $file->move($tujuan_upload,$image);
-            $user->image = $image;
+            $imageName = time() . "_" . $file->getClientOriginalName();
+            
+            // Gunakan public_path agar tujuan upload jelas ke folder public/profpic
+            $tujuan_upload = public_path('profpic');
+            
+            // Pindahkan file
+            $file->move($tujuan_upload, $imageName);
+            
+            // Hapus foto lama jika ada (opsional tapi disarankan)
+            if ($user->image && file_exists(public_path('profpic/' . $user->image))) {
+                unlink(public_path('profpic/' . $user->image));
+            }
+    
+            $user->image = $imageName;
         }
         $user->bio = $request->input('bio');
         $user->nik = $request->input('nik');

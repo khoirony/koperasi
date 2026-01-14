@@ -40,9 +40,9 @@
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                     @if (Auth::user()->image == null)
-                    <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; object-position: center;">
                     @else
-                    <img src="{{ url('/profpic/'.Auth::user()->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ url('/profpic/'.Auth::user()->image) }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; object-position: center;">
                     @endif
                     <h2>{{ Auth::user()->nama }}</h2>
                     <h3>{{ Auth::user()->email }}</h3>

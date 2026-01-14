@@ -21,9 +21,9 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     @if (Auth::user()->image == null)
-                    <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle" style="width: 35px; height: 35px; object-fit: cover; object-position: center;">
                     @else
-                    <img src="{{ url('/profpic/'.Auth::user()->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ url('/profpic/'.Auth::user()->image) }}" alt="Profile" class="rounded-circle" style="width: 35px; height: 35px; object-fit: cover; object-position: center;">
                     @endif
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->nama }}</span>
 
